@@ -4,6 +4,7 @@ import validator from "validator";
 const userSchema = mongoose.Schema({
 	name: {
 		type: String,
+		required: [true, "must have a name"],
 		trim: true,
 		maxlength: [
 			20,
@@ -20,23 +21,23 @@ const userSchema = mongoose.Schema({
 			validator: validator.isEmail,
 			message: `Enter a valid email`,
 		},
-		password: {
-			type: String,
-			required: [true, "user should have a password"],
-			minlength: 8,
-			select: false, // will never show up in any output but will be saved in DB
-		},
-		passwordConfirm: {
-			type: String,
-			required: [true, "user should have a confirem password"],
-			minlength: 8,
-			validate: {
-				// This only works on CREATE and SAVE
-				validator: function (passConfirm) {
-					return passConfirm === this.password;
-				},
-				message: `Passwords doesn't match`,
+	},
+	password: {
+		type: String,
+		required: [true, "user should have a password"],
+		minlength: 8,
+		select: false, // will never show up in any output but will be saved in DB
+	},
+	passwordConfirm: {
+		type: String,
+		required: [true, "user should have a confirm password"],
+		minlength: 8,
+		validate: {
+			// This only works on CREATE and SAVE
+			validator: function (passConfirm) {
+				return passConfirm === this.password;
 			},
+			message: `Passwords doesn't match`,
 		},
 	},
 });
