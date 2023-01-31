@@ -26,11 +26,9 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: [true, "user should have a password"],
 		minlength: 8,
-		select: false, // will never show up in any output but will be saved in DB
 	},
 	passwordConfirm: {
 		type: String,
-		required: [true, "user should have a confirm password"],
 		minlength: 8,
 		validate: {
 			// This only works on CREATE and SAVE
