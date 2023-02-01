@@ -49,7 +49,6 @@ const login = async (req, res, next) => {
 		if (!isUser) throw new Error("Email dosen't exist");
 		const user = await bcrypt.compare(plainPassword, isUser.password);
 		if (!user) throw new Error("password dosen't match");
-		removePassword(isUser);
 		res.status(200).json({
 			status: "success",
 			user: {
